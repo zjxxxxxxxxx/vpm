@@ -1,0 +1,21 @@
+<svg width="128" height="128" fill="none" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>VPM logo</title>
+  <path
+    d="M104 4H24C12.954 4 4 12.954 4 24v80c0 11.046 8.954 20 20 20h80c11.046 0 20-8.954 20-20V24c0-11.046-8.954-20-20-20z"
+    fill="url(#paint0)" />
+  <path
+    d="M104 4H24C12.954 4 4 12.954 4 24v80c0 11.046 8.954 20 20 20h80c11.046 0 20-8.954 20-20V24c0-11.046-8.954-20-20-20z"
+    stroke="url(#paint1)" stroke-width="8" />
+  <path d="M64 84c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20z" fill="url(#paint1)" />
+  <defs>
+    <linearGradient id="paint0" x1="0" y1="0" x2="128" y2="124" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f101f" />
+      <stop offset="1" stop-color="#211131" />
+    </linearGradient>
+    <linearGradient id="paint1" x1="4" y1="4" x2="124" y2="124" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8f77a3" />
+      <stop offset=".5" stop-color="#8f77a3" />
+      <stop offset="1" stop-color="#8f77a3" />
+    </linearGradient>
+  </defs>
+</svg>

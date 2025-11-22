@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-vpm-primary: var(--color-vpm-primary);
+  --color-vpm-primary2: var(--color-vpm-primary2);
+  --color-vpm-primary2: var(--color-vpm-primary2);
+  --color-vpm-accent: var(--color-vpm-accent);
+  --color-vpm-accent2: var(--color-vpm-accent2);
+  --color-vpm-accent2: var(--color-vpm-accent2);
+  --color-vpm-input: var(--color-vpm-input);
+  --color-vpm-disabled: var(--color-vpm-disabled);
+  --color-vpm-overlay-from: var(--color-vpm-overlay-from);
+  --color-vpm-overlay-to: var(--color-vpm-overlay-to);
+}
+
+:root {
+  --color-vpm-primary: #ed6bff;
+  --color-vpm-primary2: #c026d3;
+  --color-vpm-accent: #53eafd;
+  --color-vpm-accent2: #00bcd4;
+  --color-vpm-input: #ffffff;
+  --color-vpm-disabled: #a87bbc;
+  --color-vpm-overlay-from: #12132c;
+  --color-vpm-overlay-to: #27153c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-vpm-disabled: #8f77a3;
+    --color-vpm-overlay-from: #0f101f;
+    --color-vpm-overlay-to: #211131;
+  }
+}
+
+@layer utilities {
+  .animate-spin-slow,
+  .hover\:animate-spin-slow:hover {
+    animation: spin-slow 2s linear infinite;
+  }
+
+  .animate-slide-x,
+  .hover\:animate-slide-x:hover {
+    animation: slide-x 2s cubic-bezier(0.4, 0, 0.2, 1.05) infinite;
+  }
+
+  .animate-breath-shadow,
+  .hover\:animate-breath-shadow:hover {
+    animation: breath-shadow 2s ease-in-out infinite;
+  }
+
+  .breath-shadow-fuchsia,
+  .hover\:breath-shadow-fuchsia:hover {
+    --breath-shadow-color: theme(colors.vpm-primary / 0.6);
+  }
+
+  .breath-shadow-cyan,
+  .hover\:breath-shadow-cyan:hover {
+    --breath-shadow-color: theme(colors.vpm-accent / 0.6);
+  }
+
+  .animate-delay-300,
+  .hover\:animate-delay-300:hover {
+    animation-delay: 300ms;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-x {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes breath-shadow {
+  0% {
+    box-shadow: 0 0 15px var(--breath-shadow-color);
+  }
+  50% {
+    box-shadow: 0 0 35px var(--breath-shadow-color);
+  }
+  100% {
+    box-shadow: 0 0 15px var(--breath-shadow-color);
+  }
+}
+
+:root {
+  --vpm-logo-1: var(--color-vpm-primary);
+  --vpm-logo-2: var(--color-vpm-primary);
+  --vpm-logo-3: var(--color-vpm-accent);
+}
+
+.vpm-logo-disabled {
+  --vpm-logo-1: var(--color-vpm-disabled);
+  --vpm-logo-2: var(--color-vpm-disabled);
+  --vpm-logo-3: var(--color-vpm-disabled);
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+ overflow-wrap: break-word;
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

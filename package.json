@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "build:chrome": "pnpm build -- -b chrome",
     "build:firefox": "pnpm build -- -b firefox",
+    "build:all": "pnpm build:chrome & pnpm build:firefox",
     "lint": "tsc --noEmit && prettier -c '**/*.{ts,tsx}'",
     "format": "prettier -w '**/*.{ts,tsx}'"
   },
@@ -36,13 +37,20 @@
     "@types/react-dom": "^19.1.6",
     "@types/webextension-polyfill": "^0.12.4",
     "@vitejs/plugin-react": "^4.7.0",
-    "babel-plugin-clsx": "0.4.0-beta.2",
+    "babel-plugin-clsx": "0.4.1",
+    "consola": "^3.4.2",
     "crx": "^5.0.1",
+    "esno": "^4.8.0",
     "prettier": "^3.6.2",
+    "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.1.16",
     "typescript": "~5.8.3",
     "vite": "^7.0.5",
     "vite-plugin-zip-pack": "^1.2.4",
     "web-ext": "^9.1.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm format",
+    "commit-msg": "pnpm esno ./scripts/check-commit.ts"
   }
 }

@@ -1,7 +1,7 @@
-import { GlobalStoreHook } from '@/store/GlobalStore';
+import { GlobalStore } from '@/store/GlobalStore';
 
 export const AppLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const { isLoading, isDisabled } = GlobalStoreHook.useStateValue();
+  const { isLoading, isDisabled } = GlobalStore.useValue();
   return (
     <div
       className={[

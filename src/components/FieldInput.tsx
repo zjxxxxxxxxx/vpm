@@ -17,7 +17,10 @@ export const FieldInput: React.FC<FieldInputProps> = (props) => {
     <FieldLabel label={label} required={required}>
       <NeonGlow
         as="input"
-        className="mt-2 px-3 py-2 w-full text-xs text-vpm-input! placeholder:text-vpm-disabled rounded-lg outline-none focus:caret-vpm-accent focus:border-vpm-accent focus:shadow-vpm-accent/60"
+        className={[
+          'mt-2 px-3 py-2 w-full text-xs text-vpm-input! placeholder:text-vpm-disabled rounded-lg outline-none',
+          'focus:caret-vpm-accent focus:border-vpm-accent focus:shadow-vpm-accent/60',
+        ]}
         type="text"
         autoFocus={autoFocus}
         placeholder={placeholder}

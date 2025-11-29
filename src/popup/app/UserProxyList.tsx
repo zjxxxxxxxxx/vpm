@@ -4,7 +4,7 @@ import { Reorder } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { type UserProxyRule } from '@/common/types';
 import { uuid } from '@/utils/uuid';
-import { GlobalStoreHook } from '@/store/GlobalStore';
+import { GlobalStore } from '@/store/GlobalStore';
 import { NeonGlow } from '@/components/NeonGlow';
 import { Button } from '@/components/Button';
 import { Dialog } from '@/components/Dialog';
@@ -13,10 +13,10 @@ import { UserProxyCard } from './UserProxyCard';
 
 export const UserProxyList: React.FC = () => {
   const { t } = useTranslation();
-  const [{ isDisabled: disabled, userProxyRules: values }, dispatch] = GlobalStoreHook.useState();
-  const [isNewOpen, setNewOpen] = useState(false);
-  const [isEditOpen, setEditOpen] = useState(false);
-  const [isDeleteOpen, setDeleteOpen] = useState(false);
+  const [{ isDisabled: disabled, userProxyRules: values }, dispatch] = GlobalStore.useState();
+  const [isOpenNew, setOpenNew] = useState(false);
+  const [isOpenEdit, setOpenEdit] = useState(false);
+  const [isOpenDel, setOpenDel] = useState(false);
   const [formData, setFormData] = useState<UserProxyRule>();
   const [hoverId, setHoverId] = useState<string>();
   const [dragId, setDragId] = useState<string>();
@@ -50,20 +50,20 @@ export const UserProxyList: React.FC = () => {
                     value={value}
                     active={isActive}
                     disabled={isDisabled}
-                    onEnable={() =>
+                    onEnable={() => {
                       onChange(
                         values.map((item) => ({
                           ...item,
                           enabled: item.id === value.id ? !item.enabled : item.enabled,
                         })),
-                      )
-                    }
+                      );
+                    }}
                     onEdit={() => {
-                      setEditOpen(true);
+                      setOpenEdit(true);
                       setFormData(value);
                     }}
                     onDelete={() => {
-                      setDeleteOpen(true);
+                      setOpenDel(true);
                       setFormData(value);
                     }}
                   />
@@ -116,7 +116,7 @@ export const UserProxyList: React.FC = () => {
           {
             'text-vpm-input border-0 from-vpm-primary2 to-vpm-accent2 brightness-125 contrast-125 hover:brightness-130 hover:contrast-130 hover:scale-110 focus:brightness-130 focus:contrast-130 focus:scale-110':
               !disabled,
-            'text-vpm-disabled! border-vpm-disabled/60! from-vpm-overlay-from to-vpm-overlay-to':
+            'text-vpm-disabled! border-vpm-disabled/60! from-vpm-overlay-from/60 to-vpm-overlay-to/60':
               disabled,
           },
         ]}
@@ -125,7 +125,7 @@ export const UserProxyList: React.FC = () => {
         defaultFocusCSS={false}
         aria-haspopup="dialog"
         onClick={() => {
-          setNewOpen(true);
+          setOpenNew(true);
           setFormData({
             id: uuid(),
             name: '',
@@ -141,24 +141,24 @@ export const UserProxyList: React.FC = () => {
         <>
           <UserProxyForm
             title={t('New Proxy Rule')}
-            open={isNewOpen}
+            open={isOpenNew}
             value={formData}
-            onClose={setNewOpen}
+            onClose={setOpenNew}
             onSubmit={(value) => onChange([value, ...values])}
           />
           <UserProxyForm
             title={t('Edit Proxy Rule')}
-            open={isEditOpen}
+            open={isOpenEdit}
             value={formData}
-            onClose={setEditOpen}
-            onSubmit={(value) =>
-              onChange(values.map((item) => (item.id === value.id ? value : item)))
-            }
+            onClose={setOpenEdit}
+            onSubmit={(value) => {
+              onChange(values.map((item) => (item.id === value.id ? value : item)));
+            }}
           />
           <Dialog
             title={t('Are you sure you want to delete this rule?')}
-            open={isDeleteOpen}
-            onClose={setDeleteOpen}
+            open={isOpenDel}
+            onClose={setOpenDel}
             onConfirm={() => onChange(values.filter((item) => item.id !== formData.id))}
           >
             <span className="text-sm text-vpm-primary">{formData.name}</span>

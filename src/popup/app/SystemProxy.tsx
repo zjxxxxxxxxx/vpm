@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Settings } from 'lucide-react';
-import { GlobalStoreHook } from '@/store/GlobalStore';
-import { useFormState } from '@/hooks/useFormState';
+import { GlobalStore } from '@/store/GlobalStore';
+import { useMergeState } from '@/hooks/useMergeState';
 import { Button } from '@/components/Button';
 import { Dialog } from '@/components/Dialog';
 import { Switch } from '@/components/Switch';
@@ -11,9 +11,9 @@ import { FieldLabel } from '@/components/FieldLabel';
 
 export const SystemProxy: React.FC = () => {
   const { t } = useTranslation();
-  const [{ isDisabled, systemProxy }, dispatch] = GlobalStoreHook.useState();
+  const [{ isDisabled, systemProxy }, dispatch] = GlobalStore.useState();
   const [isOpen, setOpen] = useState(false);
-  const [formData, setFormData] = useFormState(systemProxy);
+  const [formData, setFormData] = useMergeState(systemProxy);
 
   return (
     <>
@@ -35,11 +35,11 @@ export const SystemProxy: React.FC = () => {
         open={isOpen}
         confirmDisabled={!formData.target}
         onClose={setOpen}
-        onConfirm={() =>
+        onConfirm={() => {
           dispatch({
             systemProxy: formData,
-          })
-        }
+          });
+        }}
       >
         <FieldInput
           label={t('Proxy Address')}
@@ -48,21 +48,21 @@ export const SystemProxy: React.FC = () => {
           placeholder={t('Example: 127.0.0.1:1080')}
           maxLength={20}
           value={formData.target}
-          onChange={(target) =>
+          onChange={(target) => {
             setFormData({
               target,
-            })
-          }
+            });
+          }}
         />
         <FieldLabel className="flex-row items-center justify-between" label={t('Enable Proxy')}>
           <Switch
             checked={formData.enabled}
             title={t('Enable Proxy')}
-            onChange={(enabled) =>
+            onChange={(enabled) => {
               setFormData({
                 enabled,
-              })
-            }
+              });
+            }}
           />
         </FieldLabel>
       </Dialog>

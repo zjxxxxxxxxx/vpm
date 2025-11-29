@@ -1,4 +1,4 @@
-<h1 align="center" title='Virtual Proxy Mapper'>
+<h1 align="center" title='VPM logo'>
   <picture> 
     <source media="(prefers-color-scheme: dark)" srcset="./public/logos/logo-full.dark.svg"> 
     <source media="(prefers-color-scheme: light)" srcset="./public/logos/logo-full.svg"> 

@@ -10,30 +10,30 @@ import { createStore } from '@/utils/store';
 import { type SystemProxy, type UserProxyRule } from '@/common/types';
 import { useAsyncEffect } from '@/hooks/useAsyncEffect';
 
-export type GlobalStoreState = {
+export type GlobalStoreValue = {
   isLoading: boolean;
   isDisabled: boolean;
   userProxyRules: UserProxyRule[];
   systemProxy: SystemProxy;
 };
 
-const DEFAULT_GLOBAL_STORE_STATE: GlobalStoreState = {
+const DEFAULT_GLOBAL_STORE_VALUE: GlobalStoreValue = {
   isLoading: true,
   isDisabled: false,
   userProxyRules: [],
   systemProxy: DEFAULT_SYSTEM_PROXY,
 };
 
-const [GlobalStoreProvider, GlobalStoreHook] = createStore(
-  DEFAULT_GLOBAL_STORE_STATE,
-  (initialState) => {
-    const [state, dispatch] = GlobalStoreHook.useState();
+const [GlobalStoreProvider, GlobalStore] = createStore(
+  DEFAULT_GLOBAL_STORE_VALUE,
+  (initialValue) => {
+    const [value, dispatch] = GlobalStore.useState();
 
     useAsyncEffect(async () => {
       const values = (await browser.storage.local.get({
-        [LOCAL_DISABLED]: initialState.isDisabled,
-        [LOCAL_USER_PROXY_RULES]: initialState.userProxyRules,
-        [LOCAL_SYSTEM_PROXY]: initialState.systemProxy,
+        [LOCAL_DISABLED]: initialValue.isDisabled,
+        [LOCAL_USER_PROXY_RULES]: initialValue.userProxyRules,
+        [LOCAL_SYSTEM_PROXY]: initialValue.systemProxy,
       })) as {
         [LOCAL_DISABLED]: boolean;
         [LOCAL_USER_PROXY_RULES]: UserProxyRule[];
@@ -48,29 +48,29 @@ const [GlobalStoreProvider, GlobalStoreHook] = createStore(
     }, []);
 
     useEffect(() => {
-      if (!state.isLoading) {
+      if (!value.isLoading) {
         browser.storage.local.set({
-          [LOCAL_DISABLED]: state.isDisabled,
+          [LOCAL_DISABLED]: value.isDisabled,
         });
       }
-    }, [state.isDisabled]);
+    }, [value.isDisabled]);
 
     useEffect(() => {
-      if (!state.isLoading) {
+      if (!value.isLoading) {
         browser.storage.local.set({
-          [LOCAL_USER_PROXY_RULES]: state.userProxyRules,
+          [LOCAL_USER_PROXY_RULES]: value.userProxyRules,
         });
       }
-    }, [state.userProxyRules]);
+    }, [value.userProxyRules]);
 
     useEffect(() => {
-      if (!state.isLoading) {
+      if (!value.isLoading) {
         browser.storage.local.set({
-          [LOCAL_SYSTEM_PROXY]: state.systemProxy,
+          [LOCAL_SYSTEM_PROXY]: value.systemProxy,
         });
       }
-    }, [state.systemProxy]);
+    }, [value.systemProxy]);
   },
 );
 
-export { GlobalStoreProvider, GlobalStoreHook };
+export { GlobalStoreProvider, GlobalStore };

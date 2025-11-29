@@ -40,7 +40,7 @@ export const Dialog: React.FC<DialogProps> = (props) => {
             aria-hidden="true"
           />
           <motion.div
-            className="absolute w-92"
+            className={['absolute w-92']}
             initial={{
               scale: 0.9,
               opacity: 0,
@@ -64,7 +64,10 @@ export const Dialog: React.FC<DialogProps> = (props) => {
               aria-labelledby={usbIds.title}
             >
               <button
-                className="absolute top-2 right-2 p-1 text-vpm-primary rounded-full cursor-pointer hover:text-vpm-accent"
+                className={[
+                  'absolute top-1.5 right-1.5 p-1.5 text-vpm-primary rounded-full cursor-pointer transition-all duration-300',
+                  'hover:text-vpm-accent hover:bg-vpm-accent/20',
+                ]}
                 title={t('Close')}
                 onClick={() => onClose?.(false)}
               >

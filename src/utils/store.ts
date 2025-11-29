@@ -1,63 +1,49 @@
-import { createContext, createElement, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, createElement, useContext, useMemo } from 'react';
+import { type MergeDispatch, useMergeState } from '@/hooks/useMergeState';
 
-export type StoreAction<State extends object> = Partial<State> | ((state: State) => Partial<State>);
-
-export type StoreDispatch<State extends object> = (action: StoreAction<State>) => void;
-
-export type StoreProvider<State extends object> = React.FC<
+export type StoreProvider<Value extends object> = React.FC<
   React.PropsWithChildren<{
-    initialState?: State;
+    initialValue?: Value;
   }>
 >;
 
-export type StoreHook<State extends object> = {
-  useState(): readonly [State, StoreDispatch<State>];
-  useStateValue(): State;
-  useDispatch(): StoreDispatch<State>;
+export type Store<Value extends object> = {
+  useState(): [Value, MergeDispatch<Value>];
+  useValue(): Value;
+  useDispatch(): MergeDispatch<Value>;
 };
 
-export function createStore<State extends object>(
-  defaultState: State,
-  useEffectHook?: (initialedState: State) => void,
+export function createStore<Value extends object>(
+  defaultValue: Value,
+  useInit?: (initialValue: Value) => void,
 ) {
-  const _StoreContext = createContext<readonly [State, StoreDispatch<State>]>([
-    defaultState,
-    () => {},
-  ]);
+  const _StoreContext = createContext<[Value, MergeDispatch<Value>]>([defaultValue, () => {}]);
 
-  const _StoreRunEffectHook: React.FC<{
-    initialedState: State;
-  }> = ({ initialedState }) => {
-    useEffectHook?.(initialedState);
+  const _StoreRunInit: React.FC<{
+    initialedValue: Value;
+  }> = ({ initialedValue }) => {
+    useInit?.(initialedValue);
     return null;
   };
 
-  const _StoreProvider: StoreProvider<State> = ({ initialState, children }) => {
-    const initialedState = useMemo(() => initialState ?? defaultState, []);
-    const [state, setState] = useState(initialedState);
-    const dispatch = useCallback((action: StoreAction<State>) => {
-      setState((state) => ({
-        ...state,
-        ...(typeof action === 'function' ? action(state) : action),
-      }));
-    }, []);
-
+  const _StoreProvider: StoreProvider<Value> = ({ initialValue, children }) => {
+    const initialedValue = useMemo(() => initialValue ?? defaultValue, []);
     return createElement(_StoreContext.Provider, {
-      value: useMemo(() => [state, dispatch] as const, [state]),
+      value: useMergeState(initialedValue),
       children: [
-        createElement(_StoreRunEffectHook, {
-          initialedState,
+        createElement(_StoreRunInit, {
+          initialedValue,
         }),
         children,
       ],
     });
   };
 
-  const _StoreHook: StoreHook<State> = {
+  const _Store: Store<Value> = {
     useState() {
       return useContext(_StoreContext);
     },
-    useStateValue() {
+    useValue() {
       return useContext(_StoreContext)[0];
     },
     useDispatch() {
@@ -65,5 +51,5 @@ export function createStore<State extends object>(
     },
   };
 
-  return [_StoreProvider, _StoreHook] as const;
+  return [_StoreProvider, _Store] as const;
 }

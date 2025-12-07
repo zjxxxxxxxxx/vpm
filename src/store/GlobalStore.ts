@@ -6,8 +6,8 @@ import {
   LOCAL_USER_PROXY_RULES,
   DEFAULT_SYSTEM_PROXY,
 } from '@/common/constants';
-import { createStore } from '@/utils/store';
 import { type SystemProxy, type UserProxyRule } from '@/common/types';
+import { createStore } from '@/utils/store';
 import { useAsyncEffect } from '@/hooks/useAsyncEffect';
 
 export type GlobalStoreValue = {

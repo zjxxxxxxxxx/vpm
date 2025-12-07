@@ -18,6 +18,6 @@ function AsTagComponent<Tag extends Tags = 'div'>(
   props: AsTagProps<Tag>,
   ref: React.Ref<ElementByAs<Tag>>,
 ) {
-  const { as = 'div', ...asProps } = props;
-  return createElement(as, { ref, ...asProps });
+  const { as = 'div', children, ...asProps } = props;
+  return createElement(as, { ref, ...asProps }, children);
 }

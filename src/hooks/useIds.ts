@@ -7,10 +7,10 @@ export function useIds<Base extends string, const Subs extends string[] = []>(
   const id = useId();
 
   return useMemo(() => {
-    const baseId = `_${toSnake(base)}${id}`;
+    const baseId = `${base}-${id}`;
     const subIds = (subs ?? []).reduce(
       (acc, sub) => {
-        acc[sub] = `${baseId}${toSnake(sub)}_`;
+        acc[sub] = `${base}-${sub}-${id}`;
         return acc;
       },
       {} as Record<string, string>,
@@ -20,8 +20,4 @@ export function useIds<Base extends string, const Subs extends string[] = []>(
       ? [string, Record<never, never>]
       : [string, Record<Subs[number], string>];
   }, [base, subs]);
-}
-
-function toSnake(str: string) {
-  return str.replace(/([A-Z])/g, (_, s, i) => (!!i ? `_${s.toLowerCase()}` : s.toLowerCase()));
 }

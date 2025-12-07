@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 import { crx } from '@crxjs/vite-plugin';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import manifest from './manifest.config.js';
+import manifest from './manifest.config.ts';
 import pkg from './package.json';
 
 const { values } = parseArgs({
@@ -19,15 +19,19 @@ const { values } = parseArgs({
 });
 
 const browser = values.browser as 'chrome' | 'firefox';
-const fileName = `${pkg.name}-${pkg.version}-${browser}`;
+const outRootDir = resolve('.output');
+const bundleName = `${pkg.name}-${pkg.version}-${browser}`;
+const bundleDir = resolve(outRootDir, bundleName);
 
 export default defineConfig({
   build: {
-    outDir: resolve(`.output/${fileName}`),
+    outDir: bundleDir,
   },
   resolve: {
     alias: {
-      '@': `${resolve(__dirname, 'src')}`,
+      '@': resolve(__dirname, 'src'),
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
     },
   },
   define: {
@@ -43,6 +47,13 @@ export default defineConfig({
               importSource: '@/utils/clsx',
             },
           ],
+          [
+            'optimize-clsx',
+            {
+              libraries: ['@/utils/clsx'],
+              removeUnnecessaryCalls: false,
+            },
+          ],
         ],
       },
     }),
@@ -51,11 +62,7 @@ export default defineConfig({
       browser,
       manifest,
     }),
-    // zip({
-    //   outDir: 'release',
-    //   outFileName: `${pkg.name}-${pkg.version}-${browser}.zip`,
-    // }),
-  ],
+  ].filter(Boolean),
   server: {
     cors: {
       origin: [/chrome-extension:\/\//],

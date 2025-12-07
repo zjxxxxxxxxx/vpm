@@ -6,6 +6,16 @@ export default defineManifest({
   name: pkg.name,
   description: pkg.description,
   version: pkg.version,
+  // @ts-ignore
+  browser_specific_settings: {
+    gecko: {
+      id: '{50123e42-1e9f-431b-ab5f-d85c88426090}',
+      strict_min_version: '112.0',
+      data_collection_permissions: {
+        required: ['browsingActivity'],
+      },
+    },
+  },
   icons: {
     16: 'public/icons/16.png',
     32: 'public/icons/32.png',

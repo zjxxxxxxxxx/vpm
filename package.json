@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:chrome": "pnpm build -- -b chrome",
-    "build:firefox": "pnpm build -- -b firefox",
-    "build:all": "pnpm build:chrome & pnpm build:firefox",
+    "build:all": "pnpm build & pnpm build -- -b firefox",
+    "chrome:zip": "pnpm build && esno ./scripts/chrome.zip.ts",
+    "firefox:xpi": "pnpm build -- -b firefox && esno ./scripts/firefox.xpi.ts",
+    "bump": "bumpp",
     "lint": "tsc --noEmit && prettier -c '**/*.{ts,tsx}'",
-    "format": "prettier -w '**/*.{ts,tsx}'"
+    "format": "prettier -w '**/*.{ts,tsx}'",
+    "postinstall": "simple-git-hooks"
   },
   "engines": {
     "node": ">=20",
@@ -22,8 +24,7 @@
     "framer-motion": "^12.23.24",
     "i18next": "^25.6.0",
     "lucide-react": "^0.552.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "preact": "^10.28.0",
     "react-i18next": "^16.2.3",
     "tailwind-merge": "^3.3.1",
     "webextension-polyfill": "^0.12.0"
@@ -32,25 +33,28 @@
     "@crxjs/vite-plugin": "^2.2.1",
     "@prettier/plugin-oxc": "^0.0.4",
     "@tailwindcss/vite": "^4.1.16",
+    "@types/adm-zip": "^0.5.7",
     "@types/node": "^24.0.15",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/webextension-polyfill": "^0.12.4",
     "@vitejs/plugin-react": "^4.7.0",
-    "babel-plugin-clsx": "0.4.1",
+    "adm-zip": "^0.5.16",
+    "babel-plugin-clsx": "^0.5.1",
+    "babel-plugin-optimize-clsx": "^2.6.2",
+    "bumpp": "^10.3.2",
+    "changelogithub": "^14.0.0",
     "consola": "^3.4.2",
-    "crx": "^5.0.1",
     "esno": "^4.8.0",
     "prettier": "^3.6.2",
     "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.1.16",
     "typescript": "~5.8.3",
     "vite": "^7.0.5",
-    "vite-plugin-zip-pack": "^1.2.4",
-    "web-ext": "^9.1.0"
+    "web-ext": "^9.2.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format",
-    "commit-msg": "pnpm esno ./scripts/check-commit.ts"
+    "pre-commit": "pnpm format && pnpm tsc --noEmit",
+    "commit-msg": "pnpm esno ./scripts/commit-msg.ts"
   }
 }

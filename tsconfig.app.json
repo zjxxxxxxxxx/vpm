@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2020",
-    "jsx": "react-jsx",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "moduleDetection": "force",
     "useDefineForClassFields": true,
-    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "types": ["vite/client"],
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["src/*"],
       "react/index": ["node_modules/@types/react/index"],

@@ -40,7 +40,7 @@ export const Dialog: React.FC<DialogProps> = (props) => {
             aria-hidden="true"
           />
           <motion.div
-            className={['absolute w-92']}
+            className="absolute w-92"
             initial={{
               scale: 0.9,
               opacity: 0,

@@ -33,7 +33,7 @@ export const SystemProxy: React.FC = () => {
       <Dialog
         title={t('System Proxy')}
         open={isOpen}
-        confirmDisabled={!formData.target}
+        confirmDisabled={formData.enabled && !formData.target}
         onClose={setOpen}
         onConfirm={() => {
           dispatch({
@@ -43,7 +43,7 @@ export const SystemProxy: React.FC = () => {
       >
         <FieldInput
           label={t('Proxy Address')}
-          required
+          required={formData.enabled}
           autoFocus
           placeholder={t('Example: 127.0.0.1:1080')}
           maxLength={20}

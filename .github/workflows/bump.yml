@@ -1,0 +1,50 @@
+name: Bump
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: New tag on version bump
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          NEW_TAG="v$(node -p "require('./package.json').version")"
+
+          echo "Last: $LAST_TAG"
+          echo "New: $NEW_TAG"
+
+          if [ "$LAST_TAG" = "$NEW_TAG" ]; then
+            echo "No version bump."
+            exit 0
+          fi
+
+          if git rev-parse "$NEW_TAG" >/dev/null 2>&1; then
+            echo "Tag $NEW_TAG already exists. Skipping."
+            exit 0
+          fi
+
+          echo "Creating new tag $NEW_TAG"
+
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git tag -a "$NEW_TAG" -m "$NEW_TAG"
+          git push origin "$NEW_TAG"
+
+          echo "✅ Tag $NEW_TAG pushed successfully."

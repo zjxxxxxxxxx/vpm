@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { existsSync, rmSync } from 'node:fs';
-import Zip from 'adm-zip';
+import { zipSync } from 'cross-zip';
 import { consola } from 'consola';
 import pkg from '../package.json';
 
@@ -19,17 +19,10 @@ if (existsSync(finalZipPath)) {
 }
 
 try {
-  const zip = new Zip();
-  zip.addLocalFolder(sourceDir);
-  zip.writeZip(finalZipPath);
-
-  if (!existsSync(finalZipPath)) {
-    consola.error('ZIP file generation failed.');
-    process.exit(1);
-  }
-
-  consola.success(`Chrome extension ZIP generated at: ${finalZipPath}`);
+  zipSync(sourceDir, finalZipPath);
 } catch (err) {
   consola.error('Chrome extension ZIP packaging failed:\n', err);
   process.exit(1);
 }
+
+consola.success(`Chrome extension ZIP generated at: ${finalZipPath}`);

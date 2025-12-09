@@ -20,7 +20,7 @@ It allows you to quickly manage and switch custom proxy rules, enabling virtual 
 ## Features
 
 - ⚡ **Instant Switching**: Quickly switch between different environments without modifying hosts or system settings
-- 🎯 **Precise Mapping**: Assign proxies flexibly for different domains or services, enabling virtual request routing
+- 🎯 **Precise Mapping**: Flexibly assign proxies for different domains or services, directing requests to the designated server.
 - 🛠 **Flexible Debugging**: Temporarily enable or disable rules for easy rollback
 - 📊 **Rule Management**: Create, edit, delete rules, and drag to adjust priorities for precise matching
 - 👁 **Status Display**: Extension icon and badge reflect the current rule status in real time

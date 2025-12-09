@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -14,16 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.22.0
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: pnpm
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.22.0
 
       - name: Install dependencies
         run: pnpm i
@@ -34,13 +34,21 @@ jobs:
       - name: Build Firefox XPI
         run: pnpm firefox:xpi
         env:
-          API_KEY: ${{ secrets.FF_API_KEY }}
-          API_SECRET: ${{ secrets.FF_API_SECRET }}
+          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
 
-      - name: Publish GitHub Release
+      - name: Upload artifacts for retention
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-artifacts-${{ github.ref_name }}
+          path: |
+            .output/vpm-*-chrome.zip
+            .output/vpm-*-firefox.xpi
+
+      - name: Create Release
         run: |
-          pnpm dlx changelogithub \
-            --token ${{ secrets.GITHUB_TOKEN }} \
-            --from $(git describe --tags --abbrev=0 HEAD^) \
-            --to $(git describe --tags --abbrev=0) \
-            --assets ".output/*.zip" ".output/*.xpi"
+          pnpm changelogithub \
+            --assets ".output/vpm-*-chrome.zip" \
+            --assets ".output/vpm-*-firefox.xpi"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

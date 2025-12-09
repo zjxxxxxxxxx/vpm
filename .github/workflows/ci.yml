@@ -5,8 +5,8 @@ on:
     branches:
       - main
   push:
-    branches:
-      - "*"
+    branches-ignore:
+      - main
 
 jobs:
   ci:
@@ -26,11 +26,20 @@ jobs:
           node-version: 20.x
           cache: pnpm
 
-      - name: Install
+      - name: Install dependencies
         run: pnpm i
 
-      - name: Lint
+      - name: Lint Code
         run: pnpm lint
 
-      - name: Build
+      - name: Build All
         run: pnpm build:all
+
+      - name: Upload build artifacts
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ github.head_ref }}
+          path: |
+            .output/vpm-*-chrome
+            .output/vpm-*-firefox

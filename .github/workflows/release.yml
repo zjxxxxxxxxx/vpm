@@ -37,18 +37,24 @@ jobs:
           WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
           WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
 
+      - name: Collect extension artifacts
+        id: artifacts
+        run: |
+          echo "chrome=$(ls .output/vpm-*-chrome.zip)" >> $GITHUB_OUTPUT
+          echo "firefox=$(ls .output/vpm-*-firefox.xpi)" >> $GITHUB_OUTPUT
+
       - name: Upload artifacts for retention
         uses: actions/upload-artifact@v4
         with:
-          name: extension-artifacts-${{ github.ref_name }}
+          name: browser-extension-${{ github.ref_name }}
           path: |
-            .output/vpm-*-chrome.zip
-            .output/vpm-*-firefox.xpi
+            ${{ steps.artifacts.outputs.chrome }}
+            ${{ steps.artifacts.outputs.firefox }}
 
-      - name: Create Release
+      - name: Create GitHub Release
         run: |
           pnpm changelogithub \
-            --assets ".output/vpm-*-chrome.zip" \
-            --assets ".output/vpm-*-firefox.xpi"
+            --assets "${{ steps.artifacts.outputs.chrome }}" \
+            --assets "${{ steps.artifacts.outputs.firefox }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -37,13 +37,25 @@ jobs:
       - name: Build All
         run: pnpm build:all
 
+      - name: Check PR
+        run: |
+          if [ "$GITHUB_EVENT_NAME" != "pull_request" ]; then
+            echo "🚫 Non-PR workflow completed, skipping PR-only steps."
+          fi
+
+      - name: Build ZIP
+        if: ${{ github.event_name == 'pull_request' }}
+        run: pnpm zip:all
+
       - name: Collect build artifacts
+        if: ${{ github.event_name == 'pull_request' }}
         id: artifacts
         run: |
-          echo "chrome=$(ls -d .output/vpm-*-chrome)" >> $GITHUB_OUTPUT
-          echo "firefox=$(ls -d .output/vpm-*-firefox)" >> $GITHUB_OUTPUT
+          echo "chrome=$(ls .output/vpm-*-chrome.zip)" >> $GITHUB_OUTPUT
+          echo "firefox=$(ls .output/vpm-*-firefox.zip)" >> $GITHUB_OUTPUT
 
       - name: Upload build artifacts
+        if: ${{ github.event_name == 'pull_request' }}
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts-${{ github.head_ref }}

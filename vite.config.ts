@@ -62,7 +62,7 @@ export default defineConfig({
       browser,
       manifest,
     }),
-  ].filter(Boolean),
+  ],
   server: {
     cors: {
       origin: [/chrome-extension:\/\//],

@@ -8,6 +8,7 @@ import {
   LOCAL_DARK,
 } from '@/common/constants';
 import { generatePacScript } from '@/utils/pac';
+import { debounce } from '@/utils/debounce';
 
 watchEvents();
 watchStorage();
@@ -42,7 +43,7 @@ function watchStorage() {
   });
 }
 
-async function updateIcons() {
+const updateIcons = debounce(async () => {
   const { isDark, isDisabled } = await getThemeStorage();
   const theme = `${isDark ? '.dark' : ''}${isDisabled ? '.disabled' : ''}`;
   const path = [16, 32, 48, 64, 128, 256].reduce(
@@ -56,9 +57,9 @@ async function updateIcons() {
   browser.action.setIcon({
     path,
   });
-}
+});
 
-async function updateProxy() {
+const updateProxy = debounce(async () => {
   const { isDisabled, userProxyRules, systemProxy } = await getProxyStorage();
   if (!isDisabled && userProxyRules.length) {
     browser.proxy.settings.set({
@@ -74,7 +75,7 @@ async function updateProxy() {
   browser.action.setBadgeText({
     text: !isDisabled && !userProxyRules.length ? '?' : '',
   });
-}
+});
 
 async function getThemeStorage() {
   const values = (await browser.storage.local.get({

@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import { crx } from '@crxjs/vite-plugin';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import { cleanViteFolder } from './scripts/clean-vite-folder.ts';
 import manifest from './manifest.config.ts';
 import pkg from './package.json';
 
@@ -19,13 +20,11 @@ const { values } = parseArgs({
 });
 
 const browser = values.browser as 'chrome' | 'firefox';
-const outRootDir = resolve('.output');
-const bundleName = `${pkg.name}-${pkg.version}-${browser}`;
-const bundleDir = resolve(outRootDir, bundleName);
+const bundle = `${pkg.name}-${pkg.version}-${browser}`;
 
 export default defineConfig({
   build: {
-    outDir: bundleDir,
+    outDir: resolve('.output', bundle),
   },
   resolve: {
     alias: {
@@ -62,6 +61,7 @@ export default defineConfig({
       browser,
       manifest,
     }),
+    cleanViteFolder(),
   ],
   server: {
     cors: {

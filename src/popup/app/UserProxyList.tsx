@@ -116,7 +116,7 @@ export const UserProxyList: React.FC = () => {
           {
             'text-vpm-input border-0 from-vpm-primary2 to-vpm-accent2 brightness-125 contrast-125 hover:brightness-130 hover:contrast-130 hover:scale-110 focus:brightness-130 focus:contrast-130 focus:scale-110':
               !disabled,
-            'text-vpm-disabled! border-vpm-disabled/60! from-vpm-overlay-from/60 to-vpm-overlay-to/60':
+            'text-vpm-disabled! border-vpm-disabled/40! from-vpm-overlay-from/60 to-vpm-overlay-to/60':
               disabled,
           },
         ]}

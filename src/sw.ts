@@ -45,10 +45,10 @@ function watchStorage() {
 
 const updateIcons = debounce(async () => {
   const { isDark, isDisabled } = await getThemeStorage();
-  const theme = `${isDark ? '.dark' : ''}${isDisabled ? '.disabled' : ''}`;
-  const path = [16, 32, 48, 64, 128, 256].reduce(
+  const state = `${isDark ? '.dark' : ''}${isDisabled ? '.disabled' : ''}`;
+  const path = [16, 32, 48, 64, 128].reduce(
     (acc, size) => {
-      acc[size] = `/icons/${size}${theme}.png`;
+      acc[size] = `icons/${size}${state}.png`;
       return acc;
     },
     {} as Record<string, string>,

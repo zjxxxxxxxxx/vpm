@@ -55,7 +55,7 @@ export const UserProxyCard: React.FC<UserProxyCardProps> = (props) => {
               'relative flex-1 h-1 rounded-full overflow-hidden',
               {
                 'bg-linear-to-r from-vpm-primary/20 via-vpm-accent/20 to-vpm-primary/20': !disabled,
-                'bg-vpm-disabled/20': disabled,
+                'bg-vpm-disabled/40': disabled,
               },
             ]}
           >
@@ -98,7 +98,7 @@ export const UserProxyCard: React.FC<UserProxyCardProps> = (props) => {
             'flex items-center justify-center p-2 w-8 h-8 text-vpm-primary rounded-full border-transparent bg-vpm-primary/20 shadow-vpm-primary/40 shadow-[0_0_10px]',
             'hover:border-vpm-primary/60 hover:bg-vpm-primary/40 hover:shadow-vpm-primary/60 hover:shadow-[0_0_20px] focus:border-vpm-primary/60 focus:bg-vpm-primary/40 focus:shadow-vpm-primary/60 focus:shadow-[0_0_20px]',
             {
-              'text-vpm-disabled! bg-vpm-disabled/20! shadow-none! hover:border-vpm-disabled/20! focus:border-vpm-disabled/20!':
+              'text-vpm-disabled! bg-vpm-disabled/40! shadow-none! hover:border-vpm-disabled/40! focus:border-vpm-disabled/40!':
                 disabled,
             },
           ]}
@@ -117,7 +117,7 @@ export const UserProxyCard: React.FC<UserProxyCardProps> = (props) => {
             'flex items-center justify-center p-2 w-8 h-8 text-vpm-accent rounded-full border-transparent bg-vpm-accent/20 shadow-vpm-accent/40 shadow-[0_0_10px]',
             'hover:border-vpm-accent/60 hover:bg-vpm-accent/40 hover:shadow-vpm-accent/60 hover:shadow-[0_0_20px] focus:border-vpm-accent/60 focus:bg-vpm-accent/40 focus:shadow-vpm-accent/60 focus:shadow-[0_0_20px]',
             {
-              'text-vpm-disabled! bg-vpm-disabled/20! shadow-none! hover:border-vpm-disabled/20! focus:border-vpm-disabled/20!':
+              'text-vpm-disabled! bg-vpm-disabled/40! shadow-none! hover:border-vpm-disabled/40! focus:border-vpm-disabled/40!':
                 disabled,
             },
           ]}

@@ -15,7 +15,7 @@ export function NeonGlow<Tag extends Tags>(props: NeonGlowProps<Tag>) {
         {
           'hover:text-vpm-accent hover:border-vpm-accent hover:shadow-vpm-accent/60 hover:breath-shadow-cyan hover:animate-breath-shadow hover:animate-delay-300':
             defaultHoverCSS && !dimmed,
-          'text-vpm-disabled border-vpm-disabled/60 shadow-[0_0_0px]': dimmed,
+          'text-vpm-disabled border-vpm-disabled/40 shadow-[0_0_0px]': dimmed,
         },
         className,
       ]}

@@ -1,6 +1,6 @@
 {
   "name": "vpm",
-  "description": "Virtual proxy mapper browser extension for developers.",
+  "description": "VPM (Virtual Proxy Mapper), a browser extension designed for Web developers.",
   "type": "module",
   "version": "0.0.0",
   "scripts": {

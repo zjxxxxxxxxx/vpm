@@ -2,32 +2,32 @@ import { defineManifest } from '@crxjs/vite-plugin';
 import pkg from './package.json';
 
 const CHROME_KEY = `-----BEGIN PRIVATE KEY-----
-MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCflWz5yo5ccFut
-fegaQJxuJHm8gIu1iV2E2FeaUzgVoECIMzSiukUm7sWX+I4hN6Vq8yHCtTX+4hup
-03/F/UdbMFPOXBpPrMfsyxRdZPcSKl9VbhgK9u5F52IXvkwVInQF1NIMfTv9NFyc
-G3hh7LVLlKnb1LYEohcfLXFhH+VaiFVUq92raSfphRiaBbRMwR+zkR+kBSH3Erll
-WmyU8TZW5em83Cv7r4IMgGutc29zDAPJMKgWECgwCdEN8yACqXeAwqO1guS+m4xV
-SWCNQOPn4PQ+CVp0lRNN70ivt+BSimcb996jtjM1QjmYNmnta/Gfo8i5Ur/WXER3
-htBbOBhfAgMBAAECggEABX4K7bHwRvOdTUjgMyOtR77hWSVeTiflboLmf89f/X1o
-5FBJIsN8bhYrsMrewWkPTozdpHMuKv6QWOM/TvhtVrVlPQFj7LgTxEi4cWy5cnXk
-TcqMXreqYACtrJmGN/f+l7DJSn0I7fJwsGK+yuyTYn/UWVZmZMIkiLjhPRYUqEkY
-79yFi9wRDSGUcz+VjNjYrtqG+GZppo74gkkbRIPjDeaz8QveFvMlqYiHoWRaWp0v
-aQ41fJzWJJlOA0XKP4MGZgcCp+jW917bukZs3uUcH2xqMUhrGYcPKyec6uxjEtdC
-b58AuzcUVQ/3JSfKmVrp6xDyDC6AKAcQNjL/hlCJ8QKBgQDgBV93EKlS5zbMbm11
-WLvdczEgpzLE7bs80uPQ58js8jHeR4pZXVUdBO5QyIQbHUERv9MUo/xfPyJampqM
-VbHUOpjn8hpBb91CXemcj55LUOfkkpBzoeMRVQ6192msq5tlwq2ag7RSQmX/DJ5/
-AbK3PBx15S5CTvTlVa3gfQm31wKBgQC2XUFQGuYO4tghTeIO0GcEQF4JtpKKQpZK
-knEttWSFcOQnHXZelK3Ti/vAfrFCY+Lf0T57LXTFdEx8h7NU1D0XfSFOR82dj2yH
-F+4nr4ToEv8J/zIqfUuacFloELvGbRfyN/gzTYIylds/n2n2j9izVHcYyPUoAYR/
-NK4lyr/yuQKBgBxIUV8k2VvAGSkCIAuaok05B9DJix1VrjfloCF1weY4RZd8jLjv
-kZlSUAwe5J7PuLFW+H04ntofjGTH9A8XmpXit/9Aj5QHXXXNiXrcnu1/T2eKIXaX
-z6UWif7rN4o3OC1GwMgrLI7eFyZ2H2SFgFyl2CoCPy7b7QsvH/6hiqKNAoGBAJfm
-c6nCzhBmOXr8QajvRG/RIcNbdRJ/RmqVMnrNVg6kqxY9v0Qm+ed0+V0s6n+PbgHa
-a/30Lgjux2sPKXwmUUDIdL6cppNwTQj2EOSzmbQpZpCwJdwog5n/rSk2jwJICqMy
-paYuEJ4MHxUOtxeuV+WAHLfjY/lP0kqW2dwW1u3ZAoGBALRyf2RS/qYc7JP35TYg
-J2BQAtwa1X9nJ4xjxrb4nVF2uQrZCWn7h93hzcsD9Gpqo/aKihngZ2maiQ2roMlO
-NMWom47CH5oPrXOI18vnlZNuHWnLg9lm2qtMZAGI9QTfPmFKRGJNub4i+yvXAuJg
-t5VAkkHVM+x2m0m19n0Xeb6U
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDppn1jC/wqrtUm
+0gTfnpvK20+xWBjKyLCO/PUgD0eciy03DzTzwZ/flqk6BeIG0r4SgPfMyZyiIkG7
+LJBhCCOkfmphV0S/hwRNE3MO3EhehSyH1ibfJP8wf5Zgs2poaXPElxs6/mMbXcOd
+tES12D3kgfmNaqGN9fdhMpQj1JBBW5+nlzXf2ds2o+ymPEKFE4n1NI2oMt5y16sX
+OsnXNnCLf3Ur7oV2qSYcYSSeFkQaUgJQHuw0LnuQzd2mVHXmwva6LoU1U9i2wIwS
+5P+qSAhFywI4Nvy4acBZOZWuFvr4zYEIHsCIV+nPPJe8jR28D0foHXzLl+OXiWk1
+M5l85+OtAgMBAAECggEAZmEN6xMK1PcTrfVzrjqVAD+1vTshbeWfO6BKllgrpEP1
+tX0D0lVCxNmC4EpInn3ETF5XdlPXPtHs5GOkBehnmcHMwkdXd+bk8xL1JQtP6J7J
+AuJK2RcgfHNDhK7JDuQ6FmexxllGOu0MdHNTcizE/fYXz6fsD0S6N0xOzh5rcT8q
+pEwZyVwigAW9gonWAJdElgE9a1NubxEymI2Uu0zIqGjE4AdUXGbnuM+CMWJHPD6c
+J8844UhwYQqwhhjASoR/jlaus39ZgEyA3m0QudEAR/IpfRsaRWyfG76mkPTB4sDe
+vsC+cflN609oGv+KbJXJFDr1273DudOFdMx+av8C3wKBgQD6POwdKCoV5VlrQcVL
+rXumrDllaXdFihfIz9FI2IxU6eTPhqtezoYRH4EVf9bh5udYJL2OtQAS+jqBaNlP
+/3Po+/DlALGR5RSPwptaeeB6v+eiZjdH5YuGm36ifaRDvdSiab79YESbL59wVQiA
+ZN31Qvt92F1Gs+CSGIysFDrPwwKBgQDvB8nUUKsq5STs0kllbPdZhfNUq8nAZ+rF
+cANA+GAAB47gh3jOKaArAVku/B4nIbDrDlrkNRMfoVJcxcIWi6dhVorakr8NrJvY
+DtqmqBd61Es1kixJG1GvOIBvcR8jFc8M868I69vOECVpdX2WBmIYCPSHq03ENh06
+giRuef03zwKBgAeFoUtXE7zIwiFZPscBlf/ymV8VBoLOndxpcs8Pw1giF8CtOaWF
+673EBqtQxnLP8BBUOmZ5xmDLqMqPDkk7Uo6kVB9uH+hUzINtxCG6HCdUcXAORocg
+vUr0jZ/wyulGYYfoSddv91/61H4Z8EF7xrhCpTCpOlSPv6ZkmoXprcLlAoGBAN1S
+rtTCJNtA9OG7DG63aIgh+V7q+ZIIJl/OCZU85VbhqK/JgFgUPtPTGcrhcuH01iWv
+UwV/B0gATYzNJ5tMkB0Wztb3jaORsXNqvZYWijcXHtRplkvS2d2OSY3mhlgsN1zc
+vbNbAFlapelx+mjRXD64/AIq4YTOPl4QZr9MgOQNAoGAVVnpW56hmTbRkSqqcn00
+QTuwG72CnydZVIYKDIFYg4DGluYSsXYCkVWXuNA1uaSXj9meXm/q/1jbP7Gh5HfT
+5KYJadINbiA4aEgSs9ojkZeDSCWkQ8DhB2T9EJtZojOBCXfAC6GuZW0NtN4ly270
+rSMHtblDgYNF1tI6+21g07w=
 -----END PRIVATE KEY-----
 `;
 const FIREFOX_UUID = '{57d21bc1-8434-5c3c-8cc8-69082edd16d9}';
@@ -49,12 +49,11 @@ export default defineManifest({
     },
   },
   icons: {
-    16: 'public/icons/16.png',
-    32: 'public/icons/32.png',
-    48: 'public/icons/48.png',
-    64: 'public/icons/64.png',
-    128: 'public/icons/128.png',
-    256: 'public/icons/256.png',
+    16: 'icons/16.png',
+    32: 'icons/32.png',
+    48: 'icons/48.png',
+    64: 'icons/64.png',
+    128: 'icons/128.png',
   },
   permissions: ['proxy', 'storage', 'management'],
   action: {

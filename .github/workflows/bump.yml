@@ -32,7 +32,7 @@ jobs:
           echo "New tag: $NEW_TAG"
 
           if [ "$LAST_TAG" = "$NEW_TAG" ]; then
-            echo "🚫 Version unchanged, skipping tag creation."
+            echo "🚫 Version unchanged, skipping tag creation." >> $GITHUB_STEP_SUMMARY
             echo "bump=false" >> $GITHUB_OUTPUT
           else
             echo "bump=true" >> $GITHUB_OUTPUT
@@ -48,4 +48,4 @@ jobs:
           git tag -a "$NEW_TAG" -m "$NEW_TAG"
           git push origin "$NEW_TAG"
 
-          echo "✅ Tag $NEW_TAG pushed successfully."
+          echo "✅ Tag $NEW_TAG pushed successfully." >> $GITHUB_STEP_SUMMARY

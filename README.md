@@ -1,8 +1,8 @@
 <h1 align="center" title="VPM logo">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./public/svgs/logo-full.dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./public/svgs/logo-full.svg">
-    <img alt="VPM Logo" src="./public/svgs/logo-full.svg" width="300" />
+    <source media="(prefers-color-scheme: dark)" srcset="./static/svgs/logo-full.dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./static/svgs/logo-full.svg">
+    <img width="300" src="./static/svgs/logo-full.svg" alt="VPM Logo" />
   </picture>
 </h1>
 
@@ -12,7 +12,8 @@
 
 ## Overview
 
-**VPM (Virtual Proxy Mapper)** is a browser extension designed for **Web developers**.  
+**VPM (Virtual Proxy Mapper)**, a browser extension designed for **Web developers**.
+
 It allows you to quickly manage and switch custom proxy rules, enabling virtual proxy mapping while supporting both local and system proxy configurations.
 
 **Core positioning**: A lightweight, secure, and instantly effective proxy management tool for developers.

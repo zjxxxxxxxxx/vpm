@@ -40,7 +40,7 @@ jobs:
       - name: Check PR
         run: |
           if [ "$GITHUB_EVENT_NAME" != "pull_request" ]; then
-            echo "🚫 Non-PR workflow completed, skipping PR-only steps."
+            echo "🚫 Non-PR workflow completed, skipping PR-only steps." >> $GITHUB_STEP_SUMMARY
           fi
 
       - name: Build ZIP

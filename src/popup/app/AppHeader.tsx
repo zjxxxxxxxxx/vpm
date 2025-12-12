@@ -11,7 +11,7 @@ export const AppHeader: React.FC = () => {
     <div className="absolute top-0 left-0 z-100 flex items-center justify-between px-4 w-full h-16 bg-linear-to-br from-vpm-overlay-from/20 to-vpm-overlay-to/20 backdrop-blur-md">
       <h1
         className={[
-          'w-21 transition-all duration-300',
+          'w-21',
           {
             'vpm-logo-disabled': isDisabled,
           },

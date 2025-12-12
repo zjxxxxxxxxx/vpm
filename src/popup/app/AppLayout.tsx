@@ -17,7 +17,7 @@ export const AppLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
           'absolute top-0 left-0 -mt-20 -ml-45 w-190 h-190 bg-linear-to-br transition-all duration-300',
           {
             'from-vpm-primary2 to-vpm-accent2 animate-spin-slow': !isDisabled,
-            'from-vpm-disabled/60 to-vpm-disabled/60': isDisabled,
+            'from-vpm-disabled/40 to-vpm-disabled/40': isDisabled,
           },
         ]}
       ></div>

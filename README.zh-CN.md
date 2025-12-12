@@ -1,8 +1,8 @@
 <h1 align="center" title="VPM logo">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./static/svgs/logo-full.dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./static/svgs/logo-full.svg">
-    <img width="300" src="./static/svgs/logo-full.svg" alt="VPM Logo" />
+    <source media="(prefers-color-scheme: dark)" srcset="./static/logo-full.dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./static/logo-full.svg">
+    <img width="300" src="./static/logo-full.svg" alt="VPM Logo" />
   </picture>
 </h1>
 

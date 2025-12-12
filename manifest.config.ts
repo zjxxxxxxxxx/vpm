@@ -31,12 +31,17 @@ rSMHtblDgYNF1tI6+21g07w=
 -----END PRIVATE KEY-----
 `;
 const FIREFOX_UUID = '{57d21bc1-8434-5c3c-8cc8-69082edd16d9}';
+const AUTHOR_EMAIL = pkg.author.match(/<([^<>]+)>/)![1];
 
 export default defineManifest({
   manifest_version: 3,
   name: pkg.name,
   description: pkg.description,
   version: pkg.version,
+  author: {
+    email: AUTHOR_EMAIL,
+  },
+  homepage_url: pkg.homepage,
   key: CHROME_KEY,
   // @ts-ignore
   browser_specific_settings: {

@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 import { crx } from '@crxjs/vite-plugin';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import { cleanViteFolder } from './scripts/clean-vite-folder.ts';
+import { cleanDotfiles } from './scripts/clean-dotfiles.ts';
 import manifest from './manifest.config.ts';
 import pkg from './package.json';
 
@@ -61,7 +61,7 @@ export default defineConfig({
       browser,
       manifest,
     }),
-    cleanViteFolder(),
+    cleanDotfiles(),
   ],
   server: {
     cors: {

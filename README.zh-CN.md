@@ -37,7 +37,7 @@
 
 ### Chrome / Chromium
 
-1. 下载 `.zip` 文件（[Release](https://github.com/zjxxxxxxxxx/vpm/releases)）
+1. 下载 `.zip` 文件（[Release](https://github.com/zjxxxxxxxxx/vpm/releases/latest)）
 2. 解压到任意文件夹
 3. 打开浏览器：`chrome://extensions`
 4. 开启 **开发者模式**
@@ -47,7 +47,7 @@
 
 ### Firefox
 
-1. 下载 `.xpi` 文件（[Release](https://github.com/zjxxxxxxxxx/vpm/releases)）
+1. 下载 `.xpi` 文件（[Release](https://github.com/zjxxxxxxxxx/vpm/releases/latest)）
 2. 打开 Firefox 浏览器
 3. 将 `.xpi` 文件拖拽到浏览器窗口
 4. 按提示确认安装即可

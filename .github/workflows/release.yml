@@ -2,17 +2,67 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      bump: ${{ steps.version.outputs.bump }}
+      tag: ${{ steps.version.outputs.tag }}
+
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Check version
+        id: version
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          NEW_TAG="v$(node -p "require('./package.json').version")"
+
+          echo "Last tag: $LAST_TAG"
+          echo "New tag: $NEW_TAG"
+
+          if [ "$LAST_TAG" = "$NEW_TAG" ]; then
+            echo "🚫 Version unchanged, skipping tag creation." >> $GITHUB_STEP_SUMMARY
+            echo "bump=false" >> $GITHUB_OUTPUT
+          else
+            echo "bump=true" >> $GITHUB_OUTPUT
+            echo "tag=$NEW_TAG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create new tag
+        if: ${{ steps.version.outputs.bump == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git tag -a "${{ steps.version.outputs.tag }}" -m "${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+          echo "✅ Tag ${{ steps.version.outputs.tag }} pushed successfully." >> $GITHUB_STEP_SUMMARY
+
   release:
+    needs: bump
+    if: needs.bump.outputs.bump == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -46,7 +96,7 @@ jobs:
       - name: Upload artifacts for retention
         uses: actions/upload-artifact@v4
         with:
-          name: browser-extension-${{ github.ref_name }}
+          name: browser-extension-${{ needs.bump.outputs.tag }}
           path: |
             ${{ steps.artifacts.outputs.chrome }}
             ${{ steps.artifacts.outputs.firefox }}

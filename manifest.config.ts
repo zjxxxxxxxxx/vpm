@@ -30,7 +30,7 @@ QTuwG72CnydZVIYKDIFYg4DGluYSsXYCkVWXuNA1uaSXj9meXm/q/1jbP7Gh5HfT
 rSMHtblDgYNF1tI6+21g07w=
 -----END PRIVATE KEY-----
 `;
-const FIREFOX_UUID = '{57d21bc1-8434-5c3c-8cc8-69082edd16d9}';
+const FIREFOX_UUID = '{a3d7d1c3-8072-5c39-962c-9fc6061857b1}';
 const AUTHOR = pkg.author.replace(/<[^>]+>/, '').trim();
 
 export default defineManifest({

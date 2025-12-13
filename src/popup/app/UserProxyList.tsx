@@ -13,7 +13,7 @@ import { UserProxyCard } from './UserProxyCard';
 
 export const UserProxyList: React.FC = () => {
   const { t } = useTranslation();
-  const [{ isDisabled: disabled, userProxyRules: values }, dispatch] = GlobalStore.useState();
+  const [{ isDisabled, userProxyRules: values }, dispatch] = GlobalStore.useState();
   const [isOpenNew, setOpenNew] = useState(false);
   const [isOpenEdit, setOpenEdit] = useState(false);
   const [isOpenDel, setOpenDel] = useState(false);
@@ -33,7 +33,7 @@ export const UserProxyList: React.FC = () => {
         {values.length ? (
           <Reorder.Group axis="y" values={values} onReorder={(newOrder) => onChange(newOrder)}>
             {values.map((value) => {
-              const isDisabled = !value.enabled || disabled;
+              const isEnable = value.enabled && !isDisabled;
               const isActive = value.id === hoverId || value.id === dragId;
 
               return (
@@ -49,7 +49,7 @@ export const UserProxyList: React.FC = () => {
                   <UserProxyCard
                     value={value}
                     active={isActive}
-                    disabled={isDisabled}
+                    disabled={!isEnable}
                     onEnable={() => {
                       onChange(
                         values.map((item) => ({
@@ -74,14 +74,14 @@ export const UserProxyList: React.FC = () => {
         ) : (
           <NeonGlow
             className="flex flex-col items-center justify-center mt-8 py-24 text-center rounded-2xl"
-            dimmed={disabled}
+            dimmed={isDisabled}
           >
             <div className="text-6xl animate-pulse">🛰️</div>
             <div
               className={[
                 'mt-4 text-base text-vpm-accent font-semibold tracking-wide transition-all duration-300',
                 {
-                  'text-vpm-disabled': disabled,
+                  'text-vpm-disabled': isDisabled,
                 },
               ]}
             >
@@ -91,7 +91,7 @@ export const UserProxyList: React.FC = () => {
               className={[
                 'flex items-center mt-2 text-xs text-vpm-primary transition-all duration-300',
                 {
-                  'text-vpm-disabled': disabled,
+                  'text-vpm-disabled': isDisabled,
                 },
               ]}
             >
@@ -100,7 +100,7 @@ export const UserProxyList: React.FC = () => {
                 className={[
                   'inline mx-0.5 text-vpm-input',
                   {
-                    'text-vpm-disabled': disabled,
+                    'text-vpm-disabled': isDisabled,
                   },
                 ]}
                 size={12}
@@ -115,9 +115,9 @@ export const UserProxyList: React.FC = () => {
           'absolute bottom-5 right-5 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-none',
           {
             'text-vpm-input border-0 from-vpm-primary2 to-vpm-accent2 brightness-125 contrast-125 hover:brightness-130 hover:contrast-130 hover:scale-110 focus:brightness-130 focus:contrast-130 focus:scale-110':
-              !disabled,
+              !isDisabled,
             'text-vpm-disabled! border-vpm-disabled/40! from-vpm-overlay-from/60 to-vpm-overlay-to/60':
-              disabled,
+              isDisabled,
           },
         ]}
         title={t('New Proxy Rule')}

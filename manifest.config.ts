@@ -31,16 +31,15 @@ rSMHtblDgYNF1tI6+21g07w=
 -----END PRIVATE KEY-----
 `;
 const FIREFOX_UUID = '{57d21bc1-8434-5c3c-8cc8-69082edd16d9}';
-const AUTHOR_EMAIL = pkg.author.match(/<([^<>]+)>/)![1];
+const AUTHOR = pkg.author.replace(/<[^>]+>/, '').trim();
 
 export default defineManifest({
   manifest_version: 3,
   name: pkg.name,
   description: pkg.description,
   version: pkg.version,
-  author: {
-    email: AUTHOR_EMAIL,
-  },
+  // @ts-ignore
+  author: AUTHOR,
   homepage_url: pkg.homepage,
   key: CHROME_KEY,
   // @ts-ignore
@@ -48,9 +47,6 @@ export default defineManifest({
     gecko: {
       id: FIREFOX_UUID,
       strict_min_version: '112.0',
-      data_collection_permissions: {
-        required: ['browsingActivity'],
-      },
     },
   },
   icons: {

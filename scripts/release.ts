@@ -1,18 +1,14 @@
 import { resolve } from 'node:path';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { generate } from 'changelogithub';
 import semver from 'semver';
 import enquirer from 'enquirer';
 import { consola } from 'consola';
-import pkg from '../package.json';
 import { run } from './run';
 
 const BASE_BRANCH = 'main';
-const TO_REF = 'HEAD';
 const PACKAGE_FILE = resolve('package.json');
-const CHANGELOG_FILE = resolve('CHANGELOG.md');
+const pkg = JSON.parse(readFileSync(PACKAGE_FILE, 'utf-8'));
 const LAST_VERSION = pkg.version;
-const LAST_TAG = `v${LAST_VERSION}`;
 
 const currentBranch = run('git', ['branch', '--show-current'], { stdio: 'pipe' }).toString().trim();
 consola.info(`Current branch: ${currentBranch}`);
@@ -65,30 +61,17 @@ if (!confirmRelease) {
 consola.success(`Version bumped to v${targetVersion}`);
 
 pkg.version = targetVersion;
-writeFileSync(PACKAGE_FILE, JSON.stringify(pkg, null, 2), 'utf-8');
+writeFileSync(PACKAGE_FILE, JSON.stringify(pkg, null, 2) + '\n', 'utf-8');
 
 const releaseBranch = `release-v${targetVersion}`;
 consola.info(`Creating release branch: ${releaseBranch}`);
 run('git', ['checkout', ['-b', releaseBranch]]);
 
-consola.info(`Generating changelog from ${LAST_TAG} -> v${targetVersion}...`);
-const { output: changelog } = await generate({
-  from: LAST_TAG,
-  to: TO_REF,
-  style: 'markdown',
-  group: true,
-  capitalize: true,
-});
-
-const prevContent = readFileSync(CHANGELOG_FILE, 'utf-8');
-writeFileSync(CHANGELOG_FILE, `${changelog}\n\n${prevContent}`, 'utf-8');
-consola.success(`✅ Changelog updated (${LAST_VERSION} -> v${targetVersion})`);
-
-consola.info(`Staging files: ${CHANGELOG_FILE}, package.json`);
-run('git', ['add', [CHANGELOG_FILE, 'package.json']]);
+consola.info(`Staging files: package.json`);
+run('git', ['add', ['package.json']]);
 
 consola.info(`Committing release changes...`);
-run('git', ['commit', ['-m', `chore: release v${targetVersion}`]]);
+run('git', ['commit', ['-m', `"chore: release v${targetVersion}"`]]);
 
 consola.info(`Pushing release branch ${releaseBranch} to origin...`);
 run('git', ['push', 'origin', releaseBranch]);

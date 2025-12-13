@@ -37,7 +37,7 @@ It allows you to quickly manage and switch custom proxy rules, enabling virtual 
 
 ### Chrome / Chromium
 
-1. Download the `.zip` file from the [Release](https://github.com/zjxxxxxxxxx/vpm/releases/latest) page
+1. Download the `.zip` file from the [Release](https://github.com/zjxxxxxxxxx/vpm/releases) page
 2. Extract it to any folder
 3. Open the browser and go to `chrome://extensions`
 4. Enable **Developer mode**
@@ -47,7 +47,7 @@ Official reference: [Load an unpacked extension](https://developer.chrome.com/do
 
 ### Firefox
 
-1. Download the `.xpi` file from the [Release](https://github.com/zjxxxxxxxxx/vpm/releases/latest) page
+1. Download the `.xpi` file from the [Release](https://github.com/zjxxxxxxxxx/vpm/releases) page
 2. Open Firefox
 3. Drag and drop the `.xpi` file into the browser window
 4. Confirm the installation when prompted
